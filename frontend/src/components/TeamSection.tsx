@@ -16,6 +16,7 @@ const teamMembers = [
   {
     name: "Sujal Raghuvanshi",
     role: "AI Developer",
+    image: "/team/sujal.jpg",
   },
   {
     name: "Tanuj Dixit",
