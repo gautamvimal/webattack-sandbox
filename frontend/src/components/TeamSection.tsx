@@ -3,25 +3,35 @@ const teamMembers = [
     name: "Daksh Gupta",
     role: "Web Developer",
     image: "/team/daksh.jpg",
+    linkedin: "https://www.linkedin.com/in/daksh-gupta-a550252a8/",
+    github: "https://github.com/daksh1gupta",
   },
   {
     name: "Vimal Gautam",
     role: "Web Developer",
     image: "/team/vimal.jpg",
+    linkedin: "https://www.linkedin.com/in/vimalgautam/",
+    github: "https://github.com/gautamvimal"
   },
   {
     name: "Digvijay Chandel",
     role: "AI Developer",
+    image: "/team/Digvijay.jpg",
+    linkedin: "https://www.linkedin.com/in/digvijay-chandel-5b4b25210/",
   },
   {
     name: "Sujal Raghuvanshi",
     role: "AI Developer",
     image: "/team/sujal.jpg",
+    linkedin: "https://www.linkedin.com/in/sujal-raghuvanshi-3430672b1/",
+    github: "https://github.com/Sujal-Raghuvanshi",
   },
   {
     name: "Tanuj Dixit",
     role: "Cybersecurity Developer",
     image: "/team/tanuj.jpg",
+    linkedin: "https://www.linkedin.com/in/tanuj-dixit-963881325/",
+    github: "https://github.com/tanuj26812",
   },
 ];
 
@@ -92,6 +102,19 @@ const TeamSection = () => {
 
               <h3 className="text-white font-medium">{member.name}</h3>
               <p className="text-cyan-400 text-sm mt-1">{member.role}</p>
+              <div className="flex justify-center gap-3 mt-2">
+              {member.linkedin && (
+                <a href={member.linkedin} target="_blank">
+                  <img src="/icons/linkedin.png" className="w-5 h-5" />
+                </a>
+              )}
+
+              {member.github && (
+                <a href={member.github} target="_blank">
+                  <img src="/icons/github.png" className="w-5 h-5" />
+                </a>
+              )}
+            </div>
             </div>
           ))}
         </div>
