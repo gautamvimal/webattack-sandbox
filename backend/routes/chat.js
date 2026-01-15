@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
 
   try {
     const response = await fetch(
-      "https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct",
+      "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta",
       {
         method: "POST",
         headers: {
@@ -22,7 +22,6 @@ router.post("/", async (req, res) => {
 
     const data = await response.json();
 
-    // HF returns different formats depending on model state
     let reply = "No response from AI";
 
     if (Array.isArray(data) && data[0]?.generated_text) {
@@ -35,11 +34,10 @@ router.post("/", async (req, res) => {
 
     res.json({ reply });
 
-  } catch (error) {
-    console.error("CHAT ERROR:", error.message);
+  } catch (err) {
+    console.error("CHAT ERROR:", err.message);
     res.status(500).json({ reply: "AI service unavailable" });
   }
 });
 
 export default router;
-
