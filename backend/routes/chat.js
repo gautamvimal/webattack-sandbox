@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -23,16 +23,26 @@ router.post("/", async (req, res) => {
           messages: [
             { role: "system", content: "You are a helpful assistant." },
             { role: "user", content: message }
-          ]
+          ],
+          temperature: 0.7
         })
       }
     );
 
     const data = await response.json();
 
-    const reply =
-      data?.choices?.[0]?.message?.content ??
-      "No response from AI";
+    // 🔍 DEBUG LOG (important)
+    console.log("GROQ RAW RESPONSE:", JSON.stringify(data, null, 2));
+
+    let reply = "No response from AI";
+
+    if (data?.choices && data.choices.length > 0) {
+      reply = data.choices[0].message?.content || reply;
+    }
+
+    if (data?.error) {
+      reply = `Groq Error: ${data.error.message || "Unknown error"}`;
+    }
 
     res.json({ reply });
 
@@ -43,3 +53,4 @@ router.post("/", async (req, res) => {
 });
 
 export default router;
+
