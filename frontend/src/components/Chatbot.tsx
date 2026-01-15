@@ -2,12 +2,16 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Chatbot = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState("");
+
+  // ✅ DEFAULT DARK MODE CHANGE (only modification)
   const [dark, setDark] = useState(
-    localStorage.getItem("chat-dark") === "true"
+    localStorage.getItem("chat-dark") !== "false"
   );
 
   const sendMessage = async () => {
@@ -16,16 +20,21 @@ const Chatbot = () => {
     setMessages(prev => [...prev, `**You:** ${input}`]);
 
     try {
-      const res = await fetch("http://localhost:3000/api/chat", {
+      const res = await fetch(`${API_URL}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input })
       });
 
+      if (!res.ok) throw new Error("API error");
+
       const data = await res.json();
       setMessages(prev => [...prev, `**Bot:**\n${data.reply}`]);
-    } catch {
-      setMessages(prev => [...prev, "**Bot:** Backend not running"]);
+    } catch (err) {
+      setMessages(prev => [
+        ...prev,
+        "**Bot:** Backend not reachable"
+      ]);
     }
 
     setInput("");
@@ -39,35 +48,31 @@ const Chatbot = () => {
 
   return (
     <>
-{/* Floating button */}
-<button
-  className="chatbot-floating-btn"
-  onClick={() => setOpen(!open)}
-  style={{
-    position: "fixed",
-    bottom: 24,
-    right: 24,
-    zIndex: 999,
-
-    width: 56,
-    height: 56,
-    borderRadius: "50%",
-    fontSize: "26px",
-
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-
-    background: "#2563eb",   // blue
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-    boxShadow: "0 6px 16px rgba(0,0,0,0.3)"
-  }}
->
-  🤖
-</button>
-
+      {/* Floating button */}
+      <button
+        className="chatbot-floating-btn"
+        onClick={() => setOpen(!open)}
+        style={{
+          position: "fixed",
+          bottom: 24,
+          right: 24,
+          zIndex: 999,
+          width: 56,
+          height: 56,
+          borderRadius: "50%",
+          fontSize: "26px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#2563eb",
+          color: "#fff",
+          border: "none",
+          cursor: "pointer",
+          boxShadow: "0 6px 16px rgba(0,0,0,0.3)"
+        }}
+      >
+        🤖
+      </button>
 
       {open && (
         <div
@@ -100,15 +105,14 @@ const Chatbot = () => {
             <ReactMarkdown
               key={i}
               components={{
-  code({ children }) {
-    return (
-      <SyntaxHighlighter language="javascript">
-        {String(children)}
-      </SyntaxHighlighter>
-    );
-  }
-}}
-
+                code({ children }) {
+                  return (
+                    <SyntaxHighlighter language="javascript">
+                      {String(children)}
+                    </SyntaxHighlighter>
+                  );
+                }
+              }}
             >
               {m}
             </ReactMarkdown>
