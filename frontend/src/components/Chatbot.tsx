@@ -1,17 +1,13 @@
-
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-
-const API_URL = import.meta.env.VITE_API_URL;
-console.log("VITE_API_URL =", API_URL);
 
 const Chatbot = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<string[]>([]);
   const [input, setInput] = useState("");
 
-  // ✅ DEFAULT DARK MODE CHANGE (only modification)
+  // Default dark mode
   const [dark, setDark] = useState(
     localStorage.getItem("chat-dark") !== "false"
   );
@@ -19,21 +15,25 @@ const Chatbot = () => {
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    setMessages(prev => [...prev, `**You:** ${input}`]);
+    setMessages((prev) => [...prev, `**You:** ${input}`]);
 
     try {
-      const res = await fetch(`${API_URL}/api/chat`, {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input })
+        body: JSON.stringify({
+          message: `You are assisting inside WebAttack Sandbox.
+User is on the Home page.
+User says: ${input}`
+        })
       });
 
       if (!res.ok) throw new Error("API error");
 
       const data = await res.json();
-      setMessages(prev => [...prev, `**Bot:**\n${data.reply}`]);
+      setMessages((prev) => [...prev, `**Bot:**\n${data.reply}`]);
     } catch (err) {
-      setMessages(prev => [
+      setMessages((prev) => [
         ...prev,
         "**Bot:** Backend not reachable"
       ]);
@@ -123,7 +123,7 @@ const Chatbot = () => {
           {/* Input */}
           <input
             value={input}
-            onChange={e => setInput(e.target.value)}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Ask text or code..."
             style={{
               width: "100%",
