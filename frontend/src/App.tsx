@@ -14,6 +14,9 @@ import SqlSandbox from "@/pages/SqlSandbox";
 import PythonSandbox from "@/pages/PythonSandbox";
 import NotFound from "@/pages/NotFound";
 
+// Import Chatbot
+import Chatbot from "@/components/Chatbot";
+
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -25,6 +28,9 @@ const App = () => {
             {/* Global Toasts */}
             <Toaster />
             <Sonner />
+
+            {/* Global Chatbot - Available on all pages */}
+            <Chatbot />
 
             {/* App Routing */}
             <BrowserRouter>

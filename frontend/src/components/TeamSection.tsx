@@ -7,18 +7,18 @@ const teamMembers = [
     github: "https://github.com/daksh1gupta",
   },
   {
+    name: "Tanuj Dixit",
+    role: "Cybersecurity Developer",
+    image: "/team/tanuj.jpg",
+    linkedin: "https://www.linkedin.com/in/tanuj-dixit-963881325/",
+    github: "https://github.com/tanuj26812",
+  },
+  {
     name: "Vimal Gautam",
     role: "Web Developer",
     image: "/team/vimal.jpg",
     linkedin: "https://www.linkedin.com/in/vimalgautam/",
-    github: "https://github.com/gautamvimal"
-  },
-  {
-    name: "Digvijay Chandel",
-    role: "AI Developer",
-    image: "/team/Digvijay.jpg",
-    linkedin: "https://www.linkedin.com/in/digvijay-singh-chandel-9726993a4/",
-    github:"https://github.com/digvijaysinghchandel043-labs"
+    github: "https://github.com/gautamvimal",
   },
   {
     name: "Sujal Raghuvanshi",
@@ -28,11 +28,11 @@ const teamMembers = [
     github: "https://github.com/Sujal-Raghuvanshi",
   },
   {
-    name: "Tanuj Dixit",
-    role: "Cybersecurity Developer",
-    image: "/team/tanuj.jpg",
-    linkedin: "https://www.linkedin.com/in/tanuj-dixit-963881325/",
-    github: "https://github.com/tanuj26812",
+     name: "Digvijay Chandel",
+    role: "AI Developer",
+    image: "/team/Digvijay.jpg",
+    linkedin: "https://www.linkedin.com/in/digvijay-singh-chandel-9726993a4/",
+    github:"https://github.com/digvijaysinghchandel043-labs",
   },
 ];
 

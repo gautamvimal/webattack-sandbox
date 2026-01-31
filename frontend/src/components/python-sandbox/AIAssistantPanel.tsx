@@ -53,8 +53,11 @@ export const AIAssistantPanel = ({
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
             className="p-2 hover:bg-cyber-border/50 rounded-lg transition-colors"
+            aria-label="Close AI Assistant Panel"
+            title="Close"
           >
             <X className="w-5 h-5 text-cyber-text-muted" />
           </button>

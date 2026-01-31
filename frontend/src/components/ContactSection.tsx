@@ -1,9 +1,9 @@
 const contacts = [
   { name: "Daksh", phone: "+91 87915 77847" },
-  { name: "Vimal", phone: "+91 84332 44233" },
-  { name: "Digvijay", phone: "+91 96395 06029" },
+  { name: "Tanuj", phone: "+91 84009 00994"},
+  { name: "Vimal", phone: "+91 84332 44233"},                                 
   { name: "Sujal", phone: "+91 82659 51082" },
-  { name: "Tanuj", phone: "+91 84009 00994" },
+  { name: "Digvijay", phone: "+91 96395 06029"},
 ];
 
 const ContactSection = () => {
